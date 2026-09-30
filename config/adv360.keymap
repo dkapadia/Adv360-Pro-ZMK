@@ -28,6 +28,14 @@
             flavor = "tap-preferred";
             bindings = <&kp>, <&kp>;
         };
+
+        bspc_del: backspace_delete {
+            compatible = "zmk,behavior-mod-morph";
+            label = "BACKSPACE_DELETE";
+            #binding-cells = <0>;
+            bindings = <&kp BSPC>, <&kp DEL>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
     };
 
     keymap {
@@ -36,18 +44,18 @@
         default_layer {
             bindings = <
 &kp EQUAL  &kp N1     &kp N2    &kp N3    &kp N4     &kp N5  &tog 1                                                           &mo 3      &kp N6  &kp N7    &kp N8     &kp N9    &kp N0    &kp MINUS
-&kp TAB    &kp Q      &kp W     &kp E     &kp R      &kp T   &none                                                            &none      &kp Y   &kp U     &kp I      &kp O     &kp P     &kp BSLH
-&kp ESC    &lt 4 A    &kp S     &kp D     &kp F      &kp G   &none     &kp LCTRL  &kp LALT      &kp LGUI           &kp RCTRL  &none      &kp H   &kp J     &kp K      &kp L     &kp SEMI  &kp SQT
+&kp TAB    &kp Q      &kp W     &kp E     &kp R      &kp T   &kp LC(LA(LS(LG(A))))                                            &none      &kp Y   &kp U     &kp I      &kp O     &kp P     &kp BSLH
+&kp ESC    &lt 4 A    &kp S     &kp D     &kp F      &kp G   &kp LC(LA(LS(LG(V))))     &kp LCTRL  &kp LALT      &kp LGUI           &kp RCTRL  &none      &kp H   &kp J     &kp K      &kp L     &kp SEMI  &kp SQT
 &kp LSHFT  &kp Z      &kp X     &kp C     &kp V      &kp B                        &kp HOME      &mt LC(LA(LS(LG(PG_UP)))) PG_UP                       &kp N   &kp M     &kp COMMA  &kp DOT   &kp FSLH  &kp RSHFT
-&mo 2      &kp GRAVE  &kp CAPS  &kp LEFT  &kp RIGHT          &kp BSPC  &kp LGUI   &kp END       &mt LC(LA(LS(LG(PG_DN)))) PAGE_DOWN &kp ENTER  &kp SPACE          &kp DOWN  &kp UP     &kp LBKT  &kp RBKT  &mo 2
+&mo 2      &kp GRAVE  &kp CAPS  &kp LEFT  &kp RIGHT          &bspc_del &kp LGUI   &kp END      &mt LC(LA(LS(LG(PG_DN)))) PAGE_DOWN &kp ENTER  &kp SPACE          &kp DOWN  &kp UP     &kp LBKT  &kp RBKT  &mo 2
             >;
         };
 
         layer_keypad {
             bindings = <
 &kp EQUAL  &kp N1     &kp N2    &kp N3    &kp N4     &kp N5  &trans                                                   &mo 3      &kp N6  &kp KP_NUM  &kp KP_EQUAL  &kp KP_DIVIDE  &kp KP_MULTIPLY  &kp MINUS
-&kp TAB    &kp Q      &kp W     &kp E     &kp R      &kp T   &none                                                    &none      &kp Y   &kp KP_N7   &kp KP_N8     &kp KP_N9      &kp KP_MINUS     &kp BSLH
-&kp ESC    &kp A      &kp S     &kp D     &kp F      &kp G   &none     &kp LCTRL  &kp LALT      &kp LGUI   &kp RCTRL  &none      &kp H   &kp KP_N4   &kp KP_N5     &kp KP_N6      &kp KP_PLUS      &kp SQT
+&kp TAB    &kp Q      &kp W     &kp E     &kp R      &kp T   &trans                                                   &none      &kp Y   &kp KP_N7   &kp KP_N8     &kp KP_N9      &kp KP_MINUS     &kp BSLH
+&kp ESC    &kp A      &kp S     &kp D     &kp F      &kp G   &trans    &kp LCTRL  &kp LALT      &kp LGUI   &kp RCTRL  &none      &kp H   &kp KP_N4   &kp KP_N5     &kp KP_N6      &kp KP_PLUS      &kp SQT
 &kp LSHFT  &kp Z      &kp X     &kp C     &kp V      &kp B                        &kp HOME      &kp PG_UP                        &kp N   &kp KP_N1   &kp KP_N2     &kp KP_N3      &kp KP_ENTER     &kp RSHFT
 &mo 2      &kp GRAVE  &kp CAPS  &kp LEFT  &kp RIGHT          &kp BSPC  &kp DEL    &kp END       &kp PG_DN  &kp ENTER  &kp KP_N0          &kp UP      &kp DOWN      &kp KP_DOT     &kp RBKT         &mo 2
             >;
@@ -56,8 +64,8 @@
         layer_fn {
             bindings = <
 &kp F1  &kp F2  &kp F3  &kp F4  &kp F5  &kp F6  &tog 1                                                 &mo 3   &kp F7                &kp F8            &kp F9             &kp F10                &kp F11  &kp F12
-&trans  &trans  &trans  &trans  &trans  &trans  &none                                                  &none   &trans                &trans            &trans             &trans                 &trans   &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &none   &trans  &trans      &trans  &trans             &none   &trans                &trans            &trans             &trans                 &trans   &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans                                                 &kp LC(LA(LS(LG(L))))  &kp C_BRI_DN  &kp C_BRI_UP  &kp C_VOL_DN  &kp C_VOL_UP  &kp C_MUTE  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans             &none                  &kp C_PREV    &kp C_PP      &kp C_NEXT    &trans        &trans      &trans
 &trans  &trans  &trans  &trans  &trans  &trans                  &trans      &trans                             &kp LC(LA(LG(LEFT)))  &kp LC(LA(LEFT))  &kp LC(LA(RIGHT))  &kp LC(LA(LG(RIGHT)))  &trans   &trans
 &trans  &trans  &trans  &trans  &trans          &trans  &trans  &trans      &trans  &kp LC(LA(ENTER))  &trans                        &kp LC(LA(D))     &kp LC(LA(F))      &kp LC(LA(G))          &trans   &trans
             >;
@@ -75,10 +83,10 @@
 
         layer_arrows {
             bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans  &trans                                      &trans  &trans    &trans    &trans  &trans     &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans                                      &trans  &trans    &trans    &trans  &trans     &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &kp LEFT  &kp DOWN  &kp UP  &kp RIGHT  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans                  &trans      &trans                  &trans    &trans    &trans  &trans     &trans  &trans
+&trans  &trans      &trans      &trans      &trans      &trans          &trans                                      &trans  &trans         &trans         &trans          &trans          &trans      &trans
+&trans  &trans      &trans      &trans      &trans      &trans          &trans                                      &trans  &kp LG(LEFT)   &kp LA(LEFT)   &kp LA(RIGHT)   &kp LG(RIGHT)   &kp PG_UP   &trans
+&trans  &trans      &kp LALT    &kp LGUI    &kp LSHFT   &kp LCTRL       &trans  &trans  &trans      &trans  &trans  &trans  &kp LEFT       &kp DOWN       &kp UP          &kp RIGHT       &kp PG_DN   &trans
+&trans  &kp LG(Z)   &kp LG(X)   &kp LG(C)   &kp LG(V)   &kp LG(LS(Z))                   &trans      &trans                  &kp LA(BSPC)   &kp BSPC       &kp DEL         &kp LA(DEL)     &trans      &trans
 &trans  &trans  &trans  &trans  &trans          &trans  &trans  &trans      &trans  &trans  &trans            &trans    &trans  &trans     &trans  &trans
             >;
         };
